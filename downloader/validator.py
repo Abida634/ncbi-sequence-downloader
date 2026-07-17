@@ -1,0 +1,1 @@
+GREETING = "validator module loaded successfully"
