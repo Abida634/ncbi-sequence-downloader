@@ -22,3 +22,6 @@ class InvalidGeneIDError(NCBIDownloaderError):
 
 class InvalidDatabaseError(NCBIDownloaderError):
     """Raised when a requested NCBI database name is not supported."""
+
+class SequenceParseError(NCBIDownloaderError):
+        """Raised when a sequence file cannot be parsed."""
