@@ -51,3 +51,7 @@ class UnsupportedFormatError(DownloaderError):
 class FileSaveError(DownloaderError):
     """Raised when a downloaded record cannot be written to disk."""
     pass
+
+class HistoryError(DownloaderError):
+    """Raised when the download history file cannot be read or written."""
+    pass

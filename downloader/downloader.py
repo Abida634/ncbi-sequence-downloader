@@ -1,5 +1,5 @@
 """Orchestrates the full download workflow: validate, search, fetch, parse, save."""
-
+from downloader.history import HistoryEntry, HistoryManager
 import logging
 from dataclasses import dataclass
 from pathlib import Path
@@ -32,11 +32,13 @@ class Downloader:
     def __init__(self, config: Config) -> None:
         self._client = EntrezClient(config)
         self._file_manager = FileManager(config.output_dir)
+        self._history = HistoryManager()
 
     def download(
         self, accession: str, fmt: str = "fasta", database: str = DEFAULT_DATABASE
     ) -> DownloadResult:
         logger.info("Starting download: accession=%s format=%s", accession, fmt)
+
 
         if fmt not in ("fasta", "genbank"):
             logger.error("Unsupported format requested: %s", fmt)
@@ -62,5 +64,9 @@ class Downloader:
         self._file_manager.save(path, raw_text)
 
         logger.info("Download complete: saved to %s (%d bytes)", path, len(raw_text))
-
+        self._history.record(
+            HistoryEntry.create(
+                accession=clean_accession, fmt=fmt, database=database, saved_path=path
+            )
+        )
         return DownloadResult(record=record, saved_path=path)
