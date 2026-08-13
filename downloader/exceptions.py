@@ -24,3 +24,17 @@ class InvalidGeneIdError(ValidationError):
 class EmptyInputError(ValidationError):
     """Raised when a required input string is empty or whitespace-only."""
     pass
+
+class NetworkError(DownloaderError):
+    """Raised when a network-related failure occurs while contacting NCBI."""
+    pass
+
+
+class NoResultsFoundError(DownloaderError):
+    """Raised when a search query returns no matching records."""
+    pass
+
+
+class FetchError(DownloaderError):
+    """Raised when fetching a record from NCBI fails."""
+    pass

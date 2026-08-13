@@ -1,20 +1,16 @@
-from downloader.validator import validate_accession, validate_gene_id
-from downloader.exceptions import ValidationError
+from downloader.config import Config
+from downloader.entrez_client import EntrezClient
+from downloader.exceptions import DownloaderError
 
-test_inputs = ["NM_001301717", "nm_001301717.3", "banana", "  ", "7157", "-5", "12abc"]
+config = Config.from_env()
+client = EntrezClient(config)
 
-for item in test_inputs:
-    try:
-        result = validate_accession(item)
-        print(f"ACCESSION OK: {item!r} -> {result}")
-    except ValidationError as e:
-        print(f"ACCESSION FAIL: {item!r} -> {e}")
+try:
+    ids = client.search(database="nucleotide", term="NM_001301717")
+    print("Found IDs:", ids)
 
-print("---")
-
-for item in test_inputs:
-    try:
-        result = validate_gene_id(item)
-        print(f"GENE ID OK: {item!r} -> {result}")
-    except ValidationError as e:
-        print(f"GENE ID FAIL: {item!r} -> {e}")
+    fasta_data = client.fetch_fasta(database="nucleotide", record_id=ids[0])
+    print("--- FASTA preview ---")
+    print(fasta_data[:300])
+except DownloaderError as e:
+    print(f"Error: {e}")
