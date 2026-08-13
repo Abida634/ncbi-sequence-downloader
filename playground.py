@@ -1,12 +1,20 @@
-from downloader.validator import is_non_empty
-from downloader.exceptions import DownloaderError
+from downloader.validator import validate_accession, validate_gene_id
+from downloader.exceptions import ValidationError
 
-print(is_non_empty("NM_001301717"))   # Should print: True
-print(is_non_empty("   "))            # Should print: False
-print(DownloaderError)                # Should print the class reference
+test_inputs = ["NM_001301717", "nm_001301717.3", "banana", "  ", "7157", "-5", "12abc"]
 
+for item in test_inputs:
+    try:
+        result = validate_accession(item)
+        print(f"ACCESSION OK: {item!r} -> {result}")
+    except ValidationError as e:
+        print(f"ACCESSION FAIL: {item!r} -> {e}")
 
-from downloader.config import Config
+print("---")
 
-config = Config.from_env()
-print(config)
+for item in test_inputs:
+    try:
+        result = validate_gene_id(item)
+        print(f"GENE ID OK: {item!r} -> {result}")
+    except ValidationError as e:
+        print(f"GENE ID FAIL: {item!r} -> {e}")
