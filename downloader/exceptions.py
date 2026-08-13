@@ -38,3 +38,7 @@ class NoResultsFoundError(DownloaderError):
 class FetchError(DownloaderError):
     """Raised when fetching a record from NCBI fails."""
     pass
+
+class ParsingError(DownloaderError):
+    """Raised when raw sequence text cannot be parsed into a structured record."""
+    pass
