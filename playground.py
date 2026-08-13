@@ -30,3 +30,19 @@ try:
 
 except DownloaderError as e:
     print(f"Error: {e}")
+
+
+from downloader.config import Config
+from downloader.downloader import Downloader
+from downloader.exceptions import DownloaderError
+
+config = Config.from_env()
+downloader = Downloader(config)
+
+try:
+    result = downloader.download(accession="NM_001301717", fmt="fasta")
+    print("Saved to:", result.saved_path)
+    print("Sequence length:", len(result.record.seq))
+    print("Description:", result.record.description)
+except DownloaderError as e:
+    print(f"Error: {e}")

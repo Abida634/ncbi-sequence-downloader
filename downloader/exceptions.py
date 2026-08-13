@@ -42,3 +42,12 @@ class FetchError(DownloaderError):
 class ParsingError(DownloaderError):
     """Raised when raw sequence text cannot be parsed into a structured record."""
     pass
+
+class UnsupportedFormatError(DownloaderError):
+    """Raised when a requested download format is not FASTA or GenBank."""
+    pass
+
+
+class FileSaveError(DownloaderError):
+    """Raised when a downloaded record cannot be written to disk."""
+    pass
