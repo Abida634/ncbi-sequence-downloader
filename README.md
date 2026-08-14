@@ -5,6 +5,7 @@ A production-quality Python tool for downloading DNA, RNA, and protein sequences
 ![Python](https://img.shields.io/badge/python-3.12+-blue.svg)
 ![Tests](https://img.shields.io/badge/tests-passing-brightgreen.svg)
 ![License](https://img.shields.io/badge/license-MIT-lightgrey.svg)
+![CI](https://github.com/Abida634/ncbi-sequence-downloader/actions/workflows/ci.yml/badge.svg)
 
 ## Table of Contents
 
@@ -35,9 +36,9 @@ A production-quality Python tool for downloading DNA, RNA, and protein sequences
 
 ## Screenshots
 
-| CLI | Web GUI |
-|---|---|
-| ![CLI screenshot](screenshots/cli.png) | ![Streamlit screenshot](screenshots/streamlit.png) |
+| CLI | Web GUI                                            |
+|---|----------------------------------------------------|
+| ![CLI screenshot](screenshots/cli.png) | ![Streamlit screenshot](screenshots/Streamlit.png) |
 
 ## Architecture
 
